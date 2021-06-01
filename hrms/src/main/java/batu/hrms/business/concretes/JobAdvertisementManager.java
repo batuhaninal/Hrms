@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import batu.hrms.business.abstracts.JobAdvertisementService;
 import batu.hrms.core.utilities.results.DataResult;
+import batu.hrms.core.utilities.results.Result;
 import batu.hrms.core.utilities.results.SuccessDataResult;
+import batu.hrms.core.utilities.results.SuccessResult;
 import batu.hrms.dataAccess.abstracts.JobAdvertisementDao;
 import batu.hrms.entities.concretes.JobAdvertisement;
 
@@ -22,6 +24,11 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 		this.jobAdvertisementDao = jobAdvertisementDao;
 	}
 
+	public Result add(JobAdvertisement jobAdvertisement) {
+		jobAdvertisementDao.save(jobAdvertisement);
+		return new SuccessResult();
+	}
+	
 	@Override
 	public DataResult<List<JobAdvertisement>> getAll() {
 		return new SuccessDataResult<List<JobAdvertisement>>(jobAdvertisementDao.findAll());
